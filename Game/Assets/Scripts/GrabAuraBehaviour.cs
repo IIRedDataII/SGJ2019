@@ -5,6 +5,8 @@ public class GrabAuraBehaviour : MonoBehaviour
     
     public GameObject grabbableItem;
     public GameObject releasableSlot;
+    public GameObject openableShranc;
+    public GameObject interactableObject;
     
     private void Start()
     {
@@ -18,6 +20,10 @@ public class GrabAuraBehaviour : MonoBehaviour
             grabbableItem = other.gameObject;
         else if (other.gameObject.tag == "Slot")
             releasableSlot = other.gameObject;
+        else if (other.gameObject.tag == "Openable")
+            openableShranc = other.gameObject;
+        else if (other.gameObject.tag == "Interactable")
+            interactableObject = other.gameObject;
     }
     
     private void OnTriggerExit(Collider other)
@@ -26,6 +32,10 @@ public class GrabAuraBehaviour : MonoBehaviour
             grabbableItem = null;
         else if (other.gameObject.tag == "Slot")
             releasableSlot = null;
+        else if (other.gameObject.tag == "Openable")
+            openableShranc = null;
+        else if (other.gameObject.tag == "Interactable")
+            interactableObject = null;
     }
     
 }
