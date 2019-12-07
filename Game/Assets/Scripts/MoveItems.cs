@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MoveItems : MonoBehaviour
 {
@@ -42,6 +40,7 @@ public class MoveItems : MonoBehaviour
         #region Grabbing Aura Movement
         
         grabAura.transform.position = transform.position + transform.forward * 1;
+        grabAura.transform.rotation = transform.rotation * Quaternion.Euler(90, 0, 0);
         
         #endregion
 
