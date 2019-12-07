@@ -9,7 +9,12 @@ public class Intro : MonoBehaviour
     public Image newspaper;
     public Text startButton;
 
-    public Sprite alternative;
+    public Sprite fail;
+    public Sprite warning;
+    public Sprite kill;
+    public Sprite scare;
+    public Sprite disable;
+    public Sprite door;
 
     void Awake ()
 	{
