@@ -39,7 +39,7 @@ public class MoveItems : MonoBehaviour
 
         #region Grabbing Aura Movement
         
-        grabAura.transform.position = transform.position + transform.forward * 10;
+        grabAura.transform.position = transform.position + transform.forward * 1;
         
         #endregion
 
@@ -47,7 +47,7 @@ public class MoveItems : MonoBehaviour
 
         if (grabbedItem != null)
         {
-            grabbedItem.transform.position = transform.position + transform.forward * 5 + transform.up * -2;
+            grabbedItem.transform.position = transform.position + transform.forward * 1 + transform.up * -0.375f;
             grabbedItem.transform.rotation = transform.rotation * Quaternion.Euler(45, 45, 0);
         }
 
