@@ -598,6 +598,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabAura: {fileID: 1815902091}
+  marker1: {fileID: 1758211387}
+  marker2: {fileID: 901286354}
+  marker3: {fileID: 1987538428}
+  marker4: {fileID: 831010913}
+  marker5: {fileID: 1508248357}
+  marker6: {fileID: 1531611023}
 --- !u!1 &645020459
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +709,7 @@ GameObject:
   - component: {fileID: 831010915}
   - component: {fileID: 831010914}
   m_Layer: 0
-  m_Name: Marker3
+  m_Name: Marker4
   m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,7 +1169,7 @@ GameObject:
   - component: {fileID: 1508248359}
   - component: {fileID: 1508248358}
   m_Layer: 0
-  m_Name: Marker4
+  m_Name: Marker5
   m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1255,7 +1261,7 @@ GameObject:
   - component: {fileID: 1531611025}
   - component: {fileID: 1531611024}
   m_Layer: 0
-  m_Name: Marker5
+  m_Name: Marker6
   m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
