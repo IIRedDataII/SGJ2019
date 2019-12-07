@@ -5,41 +5,78 @@ using UnityEngine;
 
 public class MoveItems : MonoBehaviour
 {
-
-    // Constants
-    private Vector3 item1Pos = new Vector3(-24, -4, 10);
-    private Vector3 item2Pos = new Vector3(0, -4, 10);
-    private Vector3 item3Pos = new Vector3(24, -4, 10);
+    
+    #region Variables
+    
+    // Variables
+    private bool smthGrabbed;
+    private GameObject grabbedItem;
+    private GameObject selectedMarker;
 
     // Unity variables
     public GameObject grabAura;
-    public GameObject item;
-
-    void Update()
+    
+    #endregion
+    
+    private void Start()
     {
-
-        grabAura.transform.position = transform.position + transform.forward * 10;
-        //grabAura.transform.rotation = transform.rotation * Quaternion.Euler(45, 45, 0);
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.name.Equals("Item1"))
-        {
-            Debug.Log("Item 1");
-        }
-        else if (other.gameObject.name.Equals("Item2"))
-        {
-            Debug.Log("Item 1");
-        }
-        else if (other.gameObject.name.Equals("Item3"))
-        {
-            
-            Debug.Log("Item 1");
-        }
-        
+        // set initial states
+        smthGrabbed = false;
+        grabbedItem = null;
     }
     
+    private void Update()
+    {
+
+        #region Grabbing Aura Movement
+        
+        grabAura.transform.position = transform.position + transform.forward * 10;
+        
+        #endregion
+        
+        #region Grabbed Item Movement
+
+        if (grabbedItem != null)
+        {
+            grabbedItem.transform.position = transform.position + transform.forward * 10;
+            grabbedItem.transform.rotation = transform.rotation * Quaternion.Euler(45, 45, 0);
+        }
+
+        #endregion
+
+        #region Grabbing & Releasing Items
+        
+        if (Input.GetKeyDown(KeyCode.E)) {
+
+            // grabbing
+            if (!smthGrabbed)
+            {
+                grabbedItem = grabAura.GetComponent<GrabAuraBehaviour>().grabbableItem;
+                if (grabbedItem != null)
+                    smthGrabbed = true;
+                else
+                    Debug.Log("Nothing to grab in range");
+            }
+
+            // releasing
+            else
+            {
+                selectedMarker = grabAura.GetComponent<GrabAuraBehaviour>().releasableSlot;
+                if (selectedMarker != null)
+                {
+                    grabbedItem.transform.position = selectedMarker.transform.position;
+                    grabbedItem.transform.rotation = selectedMarker.transform.rotation;
+                    grabbedItem = null;
+                    smthGrabbed = false;
+                }
+                else
+                    Debug.Log("No place to drop the item in range");
+            }
+            
+        }
+        
+        #endregion
+        
+    }
+
 }
