@@ -38,7 +38,7 @@ public class MoveItems : MonoBehaviour
 
         if (grabbedItem != null)
         {
-            grabbedItem.transform.position = transform.position + transform.forward * 10;
+            grabbedItem.transform.position = transform.position + transform.forward * 5 + transform.up * -2;
             grabbedItem.transform.rotation = transform.rotation * Quaternion.Euler(45, 45, 0);
         }
 
