@@ -14,8 +14,7 @@ public class OpenShranc : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
 
-            shranc = grabAura.GetComponent<GrabAuraBehaviour>().openableShranc;
-            Debug.Log(shranc);
+            shranc = grabAura.GetComponent<GrabAuraBehaviour>().openableShranc;Debug.Log(shranc);
             if (shranc != null)
             {
                 int i = 0;
