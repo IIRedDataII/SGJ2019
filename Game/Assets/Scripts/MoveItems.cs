@@ -29,7 +29,9 @@ public class MoveItems : MonoBehaviour
         pulsating = false;
         grabbedItem = null;
         selectedMarker = null;
-        
+        itemPulsate = null;
+        markerPulsate = null;
+
         #endregion
 
     }
