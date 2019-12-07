@@ -5,12 +5,32 @@ using UnityEngine;
 public class OpenShranc : MonoBehaviour
 {
 
-    private void Start()
+    public GameObject grabAura;
+    private GameObject shranc;
+
+    private void Update()
     {
-        
-        foreach (Transform child in transform)
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(child);
+
+            shranc = grabAura.GetComponent<GrabAuraBehaviour>().openableShranc;Debug.Log(shranc);
+            if (shranc != null)
+            {
+                int i = 0;
+                Transform[] children = new Transform[2];
+                foreach (Transform child in shranc.transform)
+                {
+                    children[i] = child;
+                    i++;
+                }
+                children[0].RotateAround(new Vector3(children[0].transform.position.x, children[0].transform.position.y, children[0].transform.position.z), Vector3.up, 90);
+                children[1].RotateAround(new Vector3(children[1].transform.position.x, children[1].transform.position.y, children[1].transform.position.z), Vector3.up, -90);
+            }
+            
+            else
+                Debug.Log("No Shranc in range to open");
+
         }
         
     }
