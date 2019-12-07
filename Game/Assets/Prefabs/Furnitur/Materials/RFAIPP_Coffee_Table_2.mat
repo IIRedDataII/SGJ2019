@@ -5,7 +5,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: RFAIPP_Coffee_Table_2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _SPECGLOSSMAP
@@ -39,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4a6e231e9a0893e45bfb5dd1d442b664, type: 3}
+        m_Texture: {fileID: 2800000, guid: 030886d1037c8f445a3fc435093857da, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -47,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 21f5f25ee7b6752428709035474276fa, type: 3}
+        m_Texture: {fileID: 2800000, guid: 74353a6856883534195df80f09dd0ed4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -66,7 +67,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.2
     - _GlossyReflections: 1
-    - _Metallic: 0.7
+    - _Metallic: 0.6
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
