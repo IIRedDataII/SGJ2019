@@ -15,6 +15,7 @@ public class onClick : MonoBehaviour
     //}
     public void openScene()
     {
+        Debug.Log("Change Scene");
         SceneManager.LoadScene("Scenes/Room 1", LoadSceneMode.Single);
     }
 }
