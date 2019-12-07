@@ -7,23 +7,51 @@ public class Intro : MonoBehaviour
 {
     public GameManager gameManager;
     public Image newspaper;
+    public Text startButton;
+
     public Sprite alternative;
 
     void Awake ()
 	{
         Debug.Log("Woke Intro");
-        gameManager.setTest("Hello World");
-        newspaper.sprite = alternative;
-        //gameManager.SetGameState(GameState.INTRO);
+        if (!gameManager.inStartup) {
+            conifgureNewspaper();
+        }
+        
 	}
     void Start()
     {
-        Debug.Log("Started Intro Script");
-        gameManager.SetGameTest(GameTest.YES);
-        if (gameManager.gameTest == GameTest.YES)
+        if (gameManager.inStartup)
         {
-            Debug.Log("First Yes");
+            Debug.Log("Should startup");
+            startButton.text = "Spiel starten";
+            gameManager.performedStartup();
         }
-        
+        Debug.Log("Started Intro Script");
+    }
+
+    private void conifgureNewspaper()
+    {
+        switch (gameManager.exitState)
+        {
+            case ExitState.FAIL:
+                Debug.Log("ExitState Fail");
+                break;
+            case ExitState.WARNING:
+                Debug.Log("ExitState Warning");
+                break;
+            case ExitState.KILL:
+                Debug.Log("ExitState Kill");
+                break;
+            case ExitState.SCARE:
+                Debug.Log("ExitState Scare");
+                break;
+            case ExitState.DISABLE:
+                Debug.Log("ExitState Disable");
+                break;
+            case ExitState.DOOR:
+                Debug.Log("ExitState Door");
+                break;
+        }
     }
 }

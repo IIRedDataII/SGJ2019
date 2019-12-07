@@ -4,14 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState { INTRO, PLAY }
-public enum GameTest { NO, YES }
+/*ExitState:
+ * 0 - FAIL: Murder + Explosion
+ * 1 - WARNING
+ * 2 - KILL murderer
+ * 3 - SCARE off murderer
+ * 4 - DISABLE murderer
+ * 5 - PREVENT murder
+ * 6 - DOOR blocked
+ */
+public enum ExitState { FAIL, WITHOUT, WARNING, KILL, SCARE, DISABLE, DOOR}
 
 public class GameManager: MonoBehaviour 
 {
     public static GameManager instance = null;
+
     public GameState gameState { get; private set; }
-    public GameTest gameTest { get; private set; }
-    public string test { get; private set; }
+    public ExitState exitState { get; private set; }
+    public bool inStartup { get; private set; } = true;
 
     private void Awake()
     {
@@ -38,14 +48,17 @@ public class GameManager: MonoBehaviour
 		this.gameState = state;
 	}
 
-    public void setTest(string text)
+    public void performedStartup()
     {
-        this.test = text;
+        this.inStartup = false;
     }
-    public void SetGameTest(GameTest test)
+
+    public void endTry(ExitState result)
     {
-        this.gameTest = test;
+        this.exitState = result;
+        SceneManager.LoadScene("Scenes/Intro", LoadSceneMode.Single);
     }
+
     public void OnApplicationQuit()
 	{
 		GameManager.instance = null;

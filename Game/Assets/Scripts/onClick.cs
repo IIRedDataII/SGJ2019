@@ -18,4 +18,10 @@ public class onClick : MonoBehaviour
         Debug.Log("Change Scene");
         SceneManager.LoadScene("Scenes/Room 1", LoadSceneMode.Single);
     }
+
+    public void quitGame()
+    {
+        Debug.Log("Quit Application");
+        Application.Quit();
+    }
 }
