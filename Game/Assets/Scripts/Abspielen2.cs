@@ -6,15 +6,32 @@ public class Abspielen2 : MonoBehaviour
 {
     public Animator anim;
     int wegOpfer;
+    public AnimationenAbspielen moerder = new AnimationenAbspielen(); 
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        gasExplosion();
+        erschiessen();
 
     }
 
+    public void erschiessen()
+    {
+        anim.SetTrigger("Start");
+        anim.SetInteger("AnfangsEntscheidung", 3);
+        wegOpfer = 4;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "knarre") {
+            anim.SetTrigger("Erschiessen1");
+            
+        }
+
+
+    }
 
     public void gasExplosion()
     {

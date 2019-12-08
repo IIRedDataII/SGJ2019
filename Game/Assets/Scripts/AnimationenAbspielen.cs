@@ -13,7 +13,18 @@ public class AnimationenAbspielen : MonoBehaviour
     void Start()
     {
         animMoerder = GetComponent<Animator>();
-        gasExplosion();
+    }
+
+    public void schiessen()
+    {
+        animMoerder.SetTrigger("Start");
+        wegMoerder = 5;
+    }
+
+    public void nichtReinkommen()
+    {
+        animMoerder.SetTrigger("Start");
+        wegMoerder = 2;
     }
 
 
@@ -26,7 +37,8 @@ public class AnimationenAbspielen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "vorTuer" && wegMoerder == 0)
+        //mutter + kind sterben
+        if (other.tag == "vorTuer" && (wegMoerder == 0 || wegMoerder == 5))
         {
             animMoerder.SetInteger("WegEntscheid", wegMoerder);
             //methode die tür öffnet
@@ -39,6 +51,15 @@ public class AnimationenAbspielen : MonoBehaviour
             mutter.explosionBeenden();
             //alles wird dunkel
         }
+
+
+        //Kommt nicht rein
+        if(other.tag == "vorTuer" && wegMoerder == 2)
+        {
+            animMoerder.SetInteger("WegEntscheid", wegMoerder);
+        }
+
+
     }
 }
 
