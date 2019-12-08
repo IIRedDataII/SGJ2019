@@ -7,8 +7,12 @@ using UnityEngine.SceneManagement;
 public class Intro : MonoBehaviour
 {
     public GameManager gameManager;
+    public Image background;
     public Image newspaper;
+    public Image explanation;
     public Text startButton;
+    public Animator spin;
+    public Animator begin;
 
     public Sprite fail;
     public Sprite warning;
@@ -16,12 +20,14 @@ public class Intro : MonoBehaviour
     public Sprite scare;
     public Sprite disable;
     public Sprite door;
+    public Sprite backgroundDark;
 
     bool shouldListen = false;
     bool hasShownNewspaper = false;
 
     void Awake ()
 	{
+        newspaper.CrossFadeAlpha(0, 0, true);
         Debug.Log("Woke Intro");
         if (!gameManager.inStartup) {
             conifgureNewspaper();
@@ -38,23 +44,27 @@ public class Intro : MonoBehaviour
         this.shouldListen = true;
     }
 
+    public void openScene()
+    {
+        SceneManager.LoadScene("Scenes/Room 1", LoadSceneMode.Single);
+    }
     void Update()
     {
-        if (Input.anyKey && this.shouldListen)
+        if (Input.anyKey && this.shouldListen && !this.hasShownNewspaper)
         {
-            SceneManager.LoadScene("Scenes/Room 1", LoadSceneMode.Single);
-            if (!hasShownNewspaper)
-            {
-                showNewspaper();
-            } else
-            {
-               SceneManager.LoadScene("Scenes/Intro", LoadSceneMode.Single);
-            }
+               showNewspaper();
         }
     }
 
     private void showNewspaper()
     {
+        Debug.Log("Show Newspaper");
+        explanation.CrossFadeAlpha(0,0,true);
+        background.CrossFadeAlpha((float)0.5, 0, true);
+        newspaper.CrossFadeAlpha(1, 0, true);
+        spin.Play("rotate", 0, 0);
+        begin.Play("BeginButtonSlideIn", 0, 0);
+        newspaper.enabled = true;
         hasShownNewspaper = true;
     }
 
