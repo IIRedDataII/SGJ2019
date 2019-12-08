@@ -13,7 +13,7 @@ public class MoveItems : MonoBehaviour
     private GameObject selectedMarker;
     private Coroutine itemPulsate;
     private Coroutine markerPulsate;
-
+    
     // Unity variables
     public GameObject grabAura;
     
@@ -66,28 +66,65 @@ public class MoveItems : MonoBehaviour
         
         #endregion
 
-        #region Grabbing & Releasing Items
         
         if (Input.GetKeyDown(KeyCode.E)) {
 
-            // grabbing
+            #region Grabbing Items
+            
+            // if no item grabbed yet
             if (grabbedItem == null)
             {
+                
+                // get available item (might be null if no item is in range)
                 grabbedItem = grabAura.GetComponent<GrabAuraBehaviour>().grabbableItem;
+                
+                // make player lose if closed shranc is in way:
+                GameObject openableShranc = grabAura.GetComponent<GrabAuraBehaviour>().openableShranc;
+                // test if there is a shranc in general in the way
+                if (openableShranc != null)
+                {
+                    // test if that shranc is closed
+                    Transform child = openableShranc.transform.GetChild(0);
+                    if (Math.Round(child.transform.rotation.y, 1) == Math.Round(0f, 1)) {
+                        grabbedItem = null;
+                    }
+                }
+                
+                // if player got item make slots pulsate
                 if (grabbedItem != null)
                 {
                     StopCoroutine(itemPulsate);
                     pulsating = false;
                     SetAlpha(true, 1);
                 }
+                
                 else
                     Debug.Log("Nothing to grab in range");
+                
             }
+            
+            #endregion
 
-            // releasing
+            #region Releasing Items
+            
             else
             {
+                
+                // get available slot (might be null if no slot is in range)
                 selectedMarker = grabAura.GetComponent<GrabAuraBehaviour>().releasableSlot;
+                
+                // make player lose slot if closed shranc is in way:
+                GameObject openableShranc = grabAura.GetComponent<GrabAuraBehaviour>().openableShranc;
+                // test if there is a shranc in general in the way
+                if (openableShranc != null)
+                {
+                    // test if that shranc is closed
+                    Transform child = openableShranc.transform.GetChild(0);
+                    if (Math.Round(child.transform.rotation.y, 1) == Math.Round(0f, 1))
+                        selectedMarker = null;
+                }
+                
+                // if player got slot, put item down & make items pulsate
                 if (selectedMarker != null)
                 {
                     grabbedItem.transform.position = selectedMarker.transform.position;
@@ -97,14 +134,66 @@ public class MoveItems : MonoBehaviour
                     pulsating = false;
                     SetAlpha(false, 0);
                 }
+                
                 else
                     Debug.Log("No place to drop the item in range");
+                
             }
             
+            #endregion
+        
+            #region Opening and closing shrancs
+        
+            // get available shranc (might be null if no shranc is in range)
+            GameObject shranc = grabAura.GetComponent<GrabAuraBehaviour>().openableShranc;
+            
+            // if player got shranc, possibly open or close it
+            if (shranc != null)
+            {
+                
+                // get children (doors)
+                int i = 0;
+                Transform[] children = new Transform[2];
+                foreach (Transform child in shranc.transform)
+                {
+                    children[i] = child;
+                    i++;
+                }
+                
+                // if shranc is open
+                if (Math.Round(children[0].transform.rotation.y, 1) == Math.Round(0.7f/*FOR SOME REASON 0.7 THIS IS THE VALUE WHEN DOOR IS OPEN*/, 1))
+                {
+                    // if player can grab no item
+                    if (grabAura.GetComponent<GrabAuraBehaviour>().grabbableItem == null)
+                    {
+                        // close shranc (cause item will be grabbed also if he can)
+                        children[0].RotateAround(
+                            new Vector3(children[0].transform.position.x, children[0].transform.position.y,
+                                children[0].transform.position.z), Vector3.up, -90);
+                        children[1].RotateAround(
+                            new Vector3(children[1].transform.position.x, children[1].transform.position.y,
+                                children[1].transform.position.z), Vector3.up, 90);
+                    }
+                    // if player can grab item, prioritize it
+                    else
+                        Debug.Log("Prioritied item");
+                }
+                
+                // if shranc is closed then open it
+                else {
+                    children[0].RotateAround(new Vector3(children[0].transform.position.x, children[0].transform.position.y, children[0].transform.position.z), Vector3.up, 90);
+                    children[1].RotateAround(new Vector3(children[1].transform.position.x, children[1].transform.position.y, children[1].transform.position.z), Vector3.up, -90);
+                }
+                
+            }
+            
+            else
+                Debug.Log("No Shranc in range to open");
+            
+            #endregion
+            
         }
-        
-        #endregion
-        
+
     }
 
     #region Helper Functions
@@ -116,13 +205,30 @@ public class MoveItems : MonoBehaviour
             objects = GameObject.FindGameObjectsWithTag("Item");
         else
             objects = GameObject.FindGameObjectsWithTag("Marker");
+        
         foreach (GameObject _object in objects)
         {
-            Renderer renderer = _object.GetComponent<Renderer>();
-            Color color = renderer.material.color;
-            color.a = alpha;
-            renderer.material.color = color;
+            // is object is made out of child objects with materials
+            if (_object.transform.childCount > 0)
+            {
+                foreach (Transform child in _object.transform)
+                {
+                    Renderer renderer = child.GetComponent<Renderer>();
+                    Color color = renderer.material.color;
+                    color.a = alpha;
+                    renderer.material.color = color;
+                }
+            }
+            // if object is just one object with material
+            else
+            {
+                Renderer renderer = _object.GetComponent<Renderer>();
+                Color color = renderer.material.color;
+                color.a = alpha;
+                renderer.material.color = color;
+            }
         }
+        
     }
     
     #endregion
