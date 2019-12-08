@@ -14,9 +14,11 @@ public class MoveItems : MonoBehaviour
     private Coroutine itemPulsate;
     private Coroutine markerPulsate;
     private bool movedItems;
-    
+
     // Unity variables
     public GameObject grabAura;
+    public float maxAlpha;
+    public float pulseSpeed;
     
     #endregion
     
@@ -259,25 +261,11 @@ public class MoveItems : MonoBehaviour
         
         foreach (GameObject _object in objects)
         {
-            // is object is made out of child objects with materials
-            if (_object.transform.childCount > 0)
-            {
-                foreach (Transform child in _object.transform)
-                {
-                    Renderer renderer = child.GetComponent<Renderer>();
-                    Color color = renderer.material.color;
-                    color.a = alpha;
-                    renderer.material.color = color;
-                }
-            }
-            // if object is just one object with material
-            else
-            {
-                Renderer renderer = _object.GetComponent<Renderer>();
-                Color color = renderer.material.color;
-                color.a = alpha;
-                renderer.material.color = color;
-            }
+            GameObject child = _object.transform.GetChild(0).gameObject;
+            Renderer renderer = child.GetComponent<Renderer>();
+            Color color = renderer.material.color;
+            color.a = alpha;
+            renderer.material.color = color;
         }
         
     }
@@ -291,19 +279,19 @@ public class MoveItems : MonoBehaviour
         pulsating = true;
         
         // Fade in
-        for (float i = 0; i <= 1; i += 0.1f)
+        for (float i = 0; i <= (isItem ? maxAlpha : 1); i += maxAlpha / 10)
         {
-            i = (float)Math.Round(i, 2);
+            i = (float)Math.Round(i, 4);
             SetAlpha(isItem, i);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(pulseSpeed);
         }
         
         // Fade out
-        for (float i = 1; i >= 0; i -= 0.1f)
+        for (float i = (isItem ? maxAlpha : 1); i >= 0; i -= maxAlpha / 10)
         {
-            i = (float)Math.Round(i, 2);
+            i = (float)Math.Round(i, 4);
             SetAlpha(isItem, i);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(pulseSpeed);
         }
         
         // Force opaque items in at the end of the last coroutine
