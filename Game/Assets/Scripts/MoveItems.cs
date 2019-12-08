@@ -7,6 +7,9 @@ public class MoveItems : MonoBehaviour
     
     #region Variables
     
+    // Constants
+    private float accuracy = 0.1f;
+    
     // Variables
     private bool pulsating;
     public GameObject grabbedItem;
@@ -16,8 +19,8 @@ public class MoveItems : MonoBehaviour
     private bool movedItems;
     
     
-
     // Unity variables
+    public GameObject door;
     public GameObject grabAura;
     public float maxAlpha;
     public float pulseSpeed;
@@ -155,21 +158,49 @@ public class MoveItems : MonoBehaviour
                     bool occupied = false;
                     foreach (GameObject item in items)
                     {
-                        if (item.transform.position == selectedMarker.transform.position)
+                        if (ComparePositions(item.transform.position, selectedMarker.transform.position))
                             occupied = true;
                     }
 
                     if (!occupied)
                     {
-                        Debug.Log("Releasing: slot was not occupied, item got placed");
-                        // put item down & make items pulsate
-                        grabbedItem.transform.position = selectedMarker.transform.position;
-                        grabbedItem.transform.rotation = selectedMarker.transform.rotation;
-                        grabbedItem = null;
-                        StopCoroutine(markerPulsate);
-                        pulsating = false;
-                        SetAlpha(false, 0);
-                        movedItems = true;
+                        Debug.Log("Releasing: slot was not occupied, item might get placed");
+                        // if slot is lock, allow only to put key down
+                        if (selectedMarker.name == "SlotKeyhole")
+                        {
+                            // if item is key, close door & delete key & lock
+                            if (grabbedItem.name == "key_gold")
+                            {
+                                Debug.Log("Item was key, slot was lock. closing door.");
+                                // remove key & lock
+                                Destroy(grabbedItem);
+                                Destroy(selectedMarker);
+                                // close door
+                                door.transform.RotateAround(new Vector3(door.transform.position.x, door.transform.position.y + 4, door.transform.position.z), Vector3.up, 18);
+                                // put item away & make items pulsate
+                                grabbedItem = null;
+                                StopCoroutine(markerPulsate);
+                                pulsating = false;
+                                SetAlpha(false, 0);
+                                movedItems = true;
+                            }
+                            else
+                                Debug.Log("Only key works here!");
+                        }
+                        // else put item down
+                        else
+                        {
+                            Debug.Log("released item normally");
+                            grabbedItem.transform.position = selectedMarker.transform.position;
+                            grabbedItem.transform.rotation = selectedMarker.transform.rotation;
+                            // put item away & make items pulsate
+                            grabbedItem = null;
+                            StopCoroutine(markerPulsate);
+                            pulsating = false;
+                            SetAlpha(false, 0);
+                            movedItems = true;
+                        }
+                        
                     }
                     else
                         Debug.Log("Releasing: Slot already occupied");
@@ -281,6 +312,13 @@ public class MoveItems : MonoBehaviour
             }
         }
         
+    }
+
+    private bool ComparePositions(Vector3 pos1, Vector3 pos2)
+    {
+        // returns true if the two positions are close enough to each other with respect to a certain accuracy
+        Vector3 result = new Vector3(Mathf.Abs(pos1.x - pos2.x), Mathf.Abs(pos1.y - pos2.y), Mathf.Abs(pos1.z - pos2.z));
+        return (result.x <= accuracy && result.y <= accuracy && result.z <= accuracy);
     }
     
     #endregion
