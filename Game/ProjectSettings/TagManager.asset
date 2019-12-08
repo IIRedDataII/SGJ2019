@@ -12,6 +12,7 @@ TagManager:
   - Openable
   - Interactable
   - Pistole
+  - ausgang
   layers:
   - Default
   - TransparentFX

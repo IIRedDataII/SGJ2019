@@ -16,6 +16,18 @@ public class Abspielen2 : MonoBehaviour
 
     }
 
+    public void abhauen()
+    {
+        anim.SetTrigger("Start");
+        anim.SetInteger("AnfangsEntscheid", 5);
+    }
+
+    public void wehtun()
+    {
+        anim.SetTrigger("Start");
+        anim.SetInteger("AnfangsEntscheid", 6);
+    }
+
     public void erschiessen()
     {//falsch
         anim.SetTrigger("Start");
@@ -46,10 +58,22 @@ public class Abspielen2 : MonoBehaviour
         StartCoroutine(gasBeenden());
     }
 
+    public void ausrutschenAusloesen()
+    {
+        StartCoroutine(ausrutschen());
+    }
+
     IEnumerator gasBeenden()
     {
         yield return new WaitForSeconds(1f);
         anim.SetInteger("AnfangsEntscheidung", wegOpfer);
+    }
+
+    IEnumerator ausrutschen()
+    {
+        yield return  new WaitForSeconds(1f);
+        anim.SetInteger("AnfangsEntscheidung", 6);
+        
     }
 
 
