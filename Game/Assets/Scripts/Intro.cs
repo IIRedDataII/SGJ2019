@@ -74,21 +74,27 @@ public class Intro : MonoBehaviour
         {
             case ExitState.FAIL:
                 Debug.Log("ExitState Fail");
+                newspaper.sprite = fail;
                 break;
             case ExitState.WARNING:
                 Debug.Log("ExitState Warning");
+                newspaper.sprite = warning;
                 break;
             case ExitState.KILL:
                 Debug.Log("ExitState Kill");
+                newspaper.sprite = kill;
                 break;
             case ExitState.SCARE:
                 Debug.Log("ExitState Scare");
+                newspaper.sprite = scare;
                 break;
             case ExitState.DISABLE:
                 Debug.Log("ExitState Disable");
+                newspaper.sprite = disable;
                 break;
             case ExitState.DOOR:
                 Debug.Log("ExitState Door");
+                newspaper.sprite = door;
                 break;
         }
     }
