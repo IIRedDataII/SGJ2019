@@ -12,6 +12,8 @@ public class GrabAuraBehaviour : MonoBehaviour
     {
         grabbableItem = null;
         releasableSlot = null;
+        openableShranc = null;
+        interactableObject = null;
     }
     
     private void OnTriggerEnter(Collider other)
