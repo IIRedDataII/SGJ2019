@@ -11,6 +11,7 @@ public class Intro : MonoBehaviour
     public Image newspaper;
     public Image explanation;
     public Text startButton;
+    public AudioSource paper;
     public Animator spin;
     public Animator begin;
 
@@ -64,6 +65,7 @@ public class Intro : MonoBehaviour
         newspaper.CrossFadeAlpha(1, 0, true);
         spin.Play("rotate", 0, 0);
         begin.Play("BeginButtonSlideIn", 0, 0);
+        paper.Play(0);
         newspaper.enabled = true;
         hasShownNewspaper = true;
     }
