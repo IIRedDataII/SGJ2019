@@ -8480,8 +8480,8 @@ MonoBehaviour:
   slotKeyhole: {fileID: 2132028141}
   slotCactus: {fileID: 524532320}
   slotKey: {fileID: 306391484}
-  robotGood: {fileID: 810712428}
-  robotBad: {fileID: 1151635456}
+  gameManager: {fileID: 7060562827991436300, guid: da0299cea792847d2b0e983353fb1a2c,
+    type: 3}
 --- !u!1 &2118346576
 GameObject:
   m_ObjectHideFlags: 0

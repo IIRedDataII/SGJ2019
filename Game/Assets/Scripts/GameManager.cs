@@ -56,7 +56,6 @@ public class GameManager: MonoBehaviour
     public void endTry(ExitState result)
     {
         this.exitState = result;
-        SceneManager.LoadScene("Scenes/Intro", LoadSceneMode.Single);
     }
 
     public void showBadEndscrene()
