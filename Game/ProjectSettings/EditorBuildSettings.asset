@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Room 1.unity
     guid: 33f9d1e323361d3419e9d1c84e401a47
+  - enabled: 1
+    path: Assets/Scenes/BadEnding.unity
+    guid: 6a47f78208b2dae44885dce3e6d5217c
+  - enabled: 1
+    path: Assets/Scenes/MediocreEnding.unity
+    guid: 3846a478eec0ea144a56aee5135777d7
+  - enabled: 1
+    path: Assets/Scenes/SuccessfulEnding.unity
+    guid: 33805fb371e0db94198ecce093aea81b
   m_configObjects: {}

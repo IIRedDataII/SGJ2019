@@ -59,6 +59,22 @@ public class GameManager: MonoBehaviour
         SceneManager.LoadScene("Scenes/Intro", LoadSceneMode.Single);
     }
 
+    public void showBadEndscrene()
+    {
+        SceneManager.LoadScene("Scenes/BadEnding", LoadSceneMode.Single);
+    }
+    public void showMediocreEndscrenn()
+    {
+        SceneManager.LoadScene("Scenes/MediocreEnding", LoadSceneMode.Single);
+    }
+    public void showSuccessfulEndscreen()
+    {
+        SceneManager.LoadScene("Scenes/SuccessfulEnding", LoadSceneMode.Single);
+    }
+    public void showMenu()
+    {
+        SceneManager.LoadScene("Scenes/Intro", LoadSceneMode.Single);
+    }
     public void OnApplicationQuit()
 	{
 		GameManager.instance = null;
