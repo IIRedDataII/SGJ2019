@@ -249,6 +249,8 @@ public class AnimationManager : MonoBehaviour
             {
                 Debug.Log("ERGEBNIS: Der Mörder bekam einen Gegenstand ins Gesicht und floh!");
                 // person kriegt dings ins gesicht, haut ab (person wird dabei gewarnt)
+                robotGood.GetComponent<Abspielen2>().abhauen();
+                robotBad.GetComponent<AnimationenAbspielen>().abhauen();
                 // TODO: animation
                 
             }
@@ -257,6 +259,8 @@ public class AnimationManager : MonoBehaviour
             {
                 Debug.Log("ERGEBNIS: Der Mörder bekam einen Kaktus ins Gesicht und konnte überwältigt werden!");
                 // person kriegt kaktus ins gesicht, wird überwältigt
+                robotGood.GetComponent<Abspielen2>().wehtun();
+                robotBad.GetComponent<AnimationenAbspielen>().wehtun();
                 // TODO: animation
             }
 

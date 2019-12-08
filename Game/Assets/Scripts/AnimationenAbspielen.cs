@@ -16,6 +16,20 @@ public class AnimationenAbspielen : MonoBehaviour
         animMoerder = GetComponent<Animator>();
     }
 
+    public void abhauen()
+    {
+        animMoerder.SetTrigger("Start");
+        wegMoerder = 1;
+        
+
+    }
+
+    public void wehtun()
+    {
+        animMoerder.SetTrigger("Start");
+        wegMoerder = 6;
+    }
+
     public void schiessen()
     {
         animMoerder.SetTrigger("Start");
@@ -64,6 +78,13 @@ public class AnimationenAbspielen : MonoBehaviour
         if(other.tag == "vorTuer" && wegMoerder == 2)
         {
             animMoerder.SetInteger("WegEntscheid", wegMoerder);
+        }
+
+        //rutscht aus
+        if (other.tag == "ausgang" && wegMoerder == 1)
+        {
+            animMoerder.SetTrigger("AusrutschenWegrennen3");
+            mutter.ausrutschenAusloesen();
         }
 
 
