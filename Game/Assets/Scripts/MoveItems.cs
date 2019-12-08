@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveItems : MonoBehaviour
 {
@@ -11,12 +12,15 @@ public class MoveItems : MonoBehaviour
     private float accuracy = 0.1f;
     
     // Variables
+    public Text movesLeftText;
     private bool pulsating;
     public GameObject grabbedItem;
     private GameObject selectedMarker;
     private Coroutine itemPulsate;
     private Coroutine markerPulsate;
     private bool movedItems;
+    public int movesLeft;
+    public bool doorClosed;
     
     
     // Unity variables
@@ -38,6 +42,8 @@ public class MoveItems : MonoBehaviour
         itemPulsate = null;
         markerPulsate = null;
         movedItems = false;
+        movesLeft = 3;
+        doorClosed = false;
 
         #endregion
 
@@ -83,8 +89,8 @@ public class MoveItems : MonoBehaviour
 
             #region Grabbing Items
 
-            // if no item grabbed yet
-            if (grabbedItem == null)
+            // if moves left and no item grabbed yet
+            if (movesLeft > 0 && grabbedItem == null)
             {
 
                 // get available item (might be null if no item is in range)
@@ -120,6 +126,11 @@ public class MoveItems : MonoBehaviour
                 else
                     Debug.Log("Grabbing: Nothing to grab in range");
 
+            }
+            
+            else if (movesLeft <= 0)
+            {
+                Debug.Log("You used up all moves");
             }
 
             #endregion
@@ -177,12 +188,16 @@ public class MoveItems : MonoBehaviour
                                 Destroy(selectedMarker);
                                 // close door
                                 door.transform.RotateAround(new Vector3(door.transform.position.x, door.transform.position.y + 4, door.transform.position.z), Vector3.up, 18);
+                                doorClosed = true;
                                 // put item away & make items pulsate
                                 grabbedItem = null;
                                 StopCoroutine(markerPulsate);
                                 pulsating = false;
                                 SetAlpha(false, 0);
                                 movedItems = true;
+                                movesLeft--;
+                                movesLeftText.text = "Moves left: " + movesLeft;
+
                             }
                             else
                                 Debug.Log("Only key works here!");
@@ -199,6 +214,8 @@ public class MoveItems : MonoBehaviour
                             pulsating = false;
                             SetAlpha(false, 0);
                             movedItems = true;
+                            movesLeft--;
+                            movesLeftText.text = "Moves left: " + movesLeft;
                         }
                         
                     }
@@ -314,7 +331,7 @@ public class MoveItems : MonoBehaviour
         
     }
 
-    private bool ComparePositions(Vector3 pos1, Vector3 pos2)
+    public bool ComparePositions(Vector3 pos1, Vector3 pos2)
     {
         // returns true if the two positions are close enough to each other with respect to a certain accuracy
         Vector3 result = new Vector3(Mathf.Abs(pos1.x - pos2.x), Mathf.Abs(pos1.y - pos2.y), Mathf.Abs(pos1.z - pos2.z));
