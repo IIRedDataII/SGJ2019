@@ -6,12 +6,13 @@ public class AnimationenAbspielen : MonoBehaviour
 {
     Animator animMoerder;
     int wegMoerder, wegOpfer;
-    public Abspielen2 mutter = new Abspielen2();
+    public Abspielen2 mutter;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        mutter = new Abspielen2();
         animMoerder = GetComponent<Animator>();
     }
 
@@ -25,6 +26,7 @@ public class AnimationenAbspielen : MonoBehaviour
     {
         animMoerder.SetTrigger("Start");
         wegMoerder = 2;
+        Debug.Log("startet schonmal, nichtkreinkommen");
     }
 
 
@@ -32,6 +34,7 @@ public class AnimationenAbspielen : MonoBehaviour
     {
         animMoerder.SetTrigger("Start");
         wegMoerder = 0;
+        Debug.Log("startet schlagen");
 
     }
 

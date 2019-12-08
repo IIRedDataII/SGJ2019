@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Abspielen2 : MonoBehaviour
 {
-    public Animator anim;
+    private Animator anim;
     int wegOpfer;
     public AnimationenAbspielen moerder = new AnimationenAbspielen(); 
 
@@ -37,6 +37,7 @@ public class Abspielen2 : MonoBehaviour
     {
         anim.SetTrigger("Start");
         wegOpfer = 1;
+        Debug.Log("ihre explosion wird ausgeführt");
 
     }
 

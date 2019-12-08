@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Item
+  - Slot
+  - Marker
+  - vorTuer
+  - hinterLady
+  - Openable
+  - Interactable
+  - Pistole
   layers:
   - Default
   - TransparentFX
