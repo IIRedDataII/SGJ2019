@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ec2e9a3881be30f4494847014f29df9a
-labels:
-- UMotion Project
+guid: d00c79e78bfa00a43a6432490ff0ee3c
+timeCreated: 1512942689
+licenseType: Store
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
