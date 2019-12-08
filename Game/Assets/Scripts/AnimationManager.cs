@@ -15,6 +15,9 @@ public class AnimationManager : MonoBehaviour
     public GameObject slotCactus;
     public GameObject slotKey;
     public GameManager gameManager;
+    
+    public GameObject robotGood;
+    public GameObject robotBad;
 
     // these variables save for each slot which item is in it. 0 = empty, 1 = Pistol, 2 = Bottle, 3 = Cactus, 4 = Key
     private int slotWorkplaceFilled;
@@ -228,6 +231,7 @@ public class AnimationManager : MonoBehaviour
             // ACTUAL GAME CODE 3 HOURS BEFORE THE DEADLINE!
             if (!doorClosed && !gasSwitched && slotAirFilled == 0 && slotDoorFilled == 0)
             {
+                robotBad.GetComponent<AnimationenAbspielen>().gasExplosion();
                 Debug.Log("ERGEBNIS: Das Opfer wurde ermordet und das Haus ging hoch!");
                 gameManager.endTry(ExitState.FAIL);
                 StartCoroutine(Fail());
@@ -236,6 +240,7 @@ public class AnimationManager : MonoBehaviour
 
             else if (!doorClosed && gasSwitched && slotAirFilled == 0 && slotDoorFilled == 0)
             {
+                robotBad.GetComponent<AnimationenAbspielen>().gasExplosion();
                 Debug.Log("ERGEBNIS: Das Opfer wurde ermordet aber das Haus ging nicht hoch!");
                 gameManager.endTry(ExitState.FAIL);
                 StartCoroutine(Fail());
@@ -243,6 +248,8 @@ public class AnimationManager : MonoBehaviour
 
             else if (!doorClosed && slotDoorFilled != 0 && slotDoorFilled != 3)
             {
+                robotGood.GetComponent<Abspielen2>().abhauen();
+                robotBad.GetComponent<AnimationenAbspielen>().abhauen();
                 Debug.Log("ERGEBNIS: Der Mörder bekam einen Gegenstand ins Gesicht und floh!");
                 gameManager.endTry(ExitState.SCARE);
                 StartCoroutine(Mediocre());
@@ -250,6 +257,8 @@ public class AnimationManager : MonoBehaviour
 
             else if (!doorClosed && slotDoorFilled == 3)
             {
+                robotGood.GetComponent<Abspielen2>().wehtun();
+                robotBad.GetComponent<AnimationenAbspielen>().wehtun();
                 Debug.Log("ERGEBNIS: Der Mörder bekam einen Kaktus ins Gesicht und konnte überwältigt werden!");
                 gameManager.endTry(ExitState.DISABLE);
                 StartCoroutine(Success());
@@ -266,6 +275,8 @@ public class AnimationManager : MonoBehaviour
 
             else if (!doorClosed && slotWorkplaceFilled == 1 && slotDoorFilled == 0)
             {
+                robotGood.GetComponent<Abspielen2>().erschiessen();
+                robotBad.GetComponent<AnimationenAbspielen>().schiessen();
                 Debug.Log("ERGEBNIS: Das Opfer hat den Mörder bemerkt und hat ihn erschossen!");
                 gameManager.endTry(ExitState.KILL);
                 StartCoroutine(Mediocre());
@@ -278,6 +289,7 @@ public class AnimationManager : MonoBehaviour
                 Debug.Log("ERGEBNIS: Die Tür war abgeschlossen und der Mörder kam nicht herein!");
                 gameManager.endTry(ExitState.DOOR);
                 StartCoroutine(Mediocre());
+                robotBad.GetComponent<AnimationenAbspielen>().nichtReinkommen();
                 // person kommt nicht rein (tür wird bei schlüsselanimation zugemacht) (Fluransicht)
             }
             
