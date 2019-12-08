@@ -12,12 +12,12 @@ public class Abspielen2 : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        erschiessen();
+        
 
     }
 
     public void erschiessen()
-    {
+    {//falsch
         anim.SetTrigger("Start");
         anim.SetInteger("AnfangsEntscheidung", 3);
         wegOpfer = 4;
@@ -37,6 +37,7 @@ public class Abspielen2 : MonoBehaviour
     {
         anim.SetTrigger("Start");
         wegOpfer = 1;
+        Debug.Log("ihre explosion wird ausgeführt");
 
     }
 

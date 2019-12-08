@@ -13,6 +13,9 @@ public class AnimationManager : MonoBehaviour
     public GameObject slotCactus;
     public GameObject slotKey;
 
+    public GameObject robotGood;
+    public GameObject robotBad;
+
     // these variables save for each slot which item is in it. 0 = empty, 1 = Pistol, 2 = Bottle, 3 = Cactus, 4 = Key
     private int slotWorkplaceFilled;
     private int slotPistolFilled;
@@ -226,38 +229,50 @@ public class AnimationManager : MonoBehaviour
             if (!doorClosed && !gasSwitched && slotAirFilled == 0 && slotDoorFilled == 0)
             {
                 Debug.Log("ERGEBNIS: Das Opfer wurde ermordet und das Haus ging hoch!");
-                // keine änderung (hinterrücks erschlagen mit gasexplosion)
+                //robotGood.GetComponent<Abspielen2>().gasExplosion();
+                robotBad.GetComponent<AnimationenAbspielen>().gasExplosion();
+                // TODO: ende anpassen
+
             }
 
             else if (!doorClosed && gasSwitched && slotAirFilled == 0 && slotDoorFilled == 0)
             {
                 Debug.Log("ERGEBNIS: Das Opfer wurde ermordet aber das Haus ging nicht hoch!");
-                // keine änderung (hinterrücks erschlagen ohne explosion)
+                //robotGood.GetComponent<Abspielen2>().gasExplosion();
+                Debug.Log("sie wird in main gestartet");
+                robotBad.GetComponent<AnimationenAbspielen>().gasExplosion();
+                // TODO: ende anpassen
+                
             }
 
             else if (!doorClosed && slotDoorFilled != 0 && slotDoorFilled != 3)
             {
                 Debug.Log("ERGEBNIS: Der Mörder bekam einen Gegenstand ins Gesicht und floh!");
                 // person kriegt dings ins gesicht, haut ab (person wird dabei gewarnt)
+                // TODO: animation
+                
             }
 
             else if (!doorClosed && slotDoorFilled == 3)
             {
                 Debug.Log("ERGEBNIS: Der Mörder bekam einen Kaktus ins Gesicht und konnte überwältigt werden!");
                 // person kriegt kaktus ins gesicht, wird überwältigt
+                // TODO: animation
             }
 
             else if (!doorClosed && slotWorkplaceFilled != 1 && slotDoorFilled == 0)
             {
                 Debug.Log("ERGEBNIS: Das Opfer hat den Mörder bemerkt und sie haben sich gegenseintig umgebracht!");
                 // person wird gewarnt, personen erstechen sich gegeseitig
-                // TODO: sound
+                // TODO: sound, animation
             }
 
             else if (!doorClosed && slotWorkplaceFilled == 1 && slotDoorFilled == 0)
             {
                 Debug.Log("ERGEBNIS: Das Opfer hat den Mörder bemerkt und hat ihn erschossen!");
                 // person wird gewarnt, erschießt mörder
+                robotGood.GetComponent<Abspielen2>().erschiessen();
+                robotBad.GetComponent<AnimationenAbspielen>().schiessen();
                 // TODO: sound & pistole bewegen
             }
 
@@ -265,6 +280,7 @@ public class AnimationManager : MonoBehaviour
             {
                 Debug.Log("ERGEBNIS: Die Tür war abgeschlossen und der Mörder kam nicht herein!");
                 // person kommt nicht rein (tür wird bei schlüsselanimation zugemacht) (Fluransicht)
+                robotBad.GetComponent<AnimationenAbspielen>().nichtReinkommen();
             }
             
             else
