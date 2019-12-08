@@ -8,6 +8,8 @@ TagManager:
   - Item
   - Slot
   - Openable
+  - vorTuer
+  - hinterLady
   layers:
   - Default
   - TransparentFX
