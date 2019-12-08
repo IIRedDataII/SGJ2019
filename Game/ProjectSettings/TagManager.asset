@@ -4,11 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Marker
   - Item
-  - Slot
-  - Openable
-  - Interactable
   layers:
   - Default
   - TransparentFX
