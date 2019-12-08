@@ -26,12 +26,6 @@ public class Intro : MonoBehaviour
 	}
     void Start()
     {
-        if (gameManager.inStartup)
-        {
-            Debug.Log("Should startup");
-            startButton.text = "Spiel starten";
-            gameManager.performedStartup();
-        }
         Debug.Log("Started Intro Script");
     }
 
