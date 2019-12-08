@@ -1,5 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Game/Assets/Animations/moerderController.controller.meta
 guid: b418322cce7fdcb499467e31562894aa
+=======
+guid: 976016479344e4b4db31423426facc42
+labels:
+- UMotion Project
+>>>>>>> 9a63bb48d7465664b7ba9232a4f55a7272ac7dda:Game/Assets/Animations/BabyKyleIstTraurig_Animation.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000

@@ -4,12 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Marker
   - Item
-  - Slot
-  - Openable
-  - vorTuer
-  - hinterLady
   layers:
   - Default
   - TransparentFX

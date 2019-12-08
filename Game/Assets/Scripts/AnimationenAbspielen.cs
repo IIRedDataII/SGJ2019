@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class AnimationenAbspielen : MonoBehaviour
 {
-    Animator animOpfer;
     Animator animMoerder;
     int wegMoerder, wegOpfer;
+    public Abspielen2 mutter = new Abspielen2();
 
 
     // Start is called before the first frame update
     void Start()
     {
-        animOpfer = GetComponent<Animator>();
         animMoerder = GetComponent<Animator>();
         gasExplosion();
     }
@@ -21,9 +20,7 @@ public class AnimationenAbspielen : MonoBehaviour
     public void gasExplosion()
     {
         animMoerder.SetTrigger("Start");
-        animOpfer.SetTrigger("Start");
         wegMoerder = 0;
-        wegOpfer = 1;
 
     }
 
@@ -37,9 +34,9 @@ public class AnimationenAbspielen : MonoBehaviour
 
         if(other.tag == "hinterLady" && wegMoerder == 0)
         {
-            //animMoerder.SetInteger("testint", 3);
+            
             animMoerder.SetTrigger("GasExplosion/AlleTot2");
-            animOpfer.SetInteger("AnfangsEntscheidung", wegOpfer);
+            mutter.explosionBeenden();
             //alles wird dunkel
         }
     }
