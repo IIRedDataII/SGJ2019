@@ -17,7 +17,7 @@ public class Abspielen2 : MonoBehaviour
     }
 
     public void erschiessen()
-    {
+    {//falsch
         anim.SetTrigger("Start");
         anim.SetInteger("AnfangsEntscheidung", 3);
         wegOpfer = 4;
