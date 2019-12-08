@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Abspielen2 : MonoBehaviour
 {
-    private Animator anim;
+    public Animator anim;
     int wegOpfer;
     public AnimationenAbspielen moerder = new AnimationenAbspielen(); 
 
@@ -12,7 +12,7 @@ public class Abspielen2 : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        erschiessen();
+        
 
     }
 

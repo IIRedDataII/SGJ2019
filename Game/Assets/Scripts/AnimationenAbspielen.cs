@@ -12,7 +12,7 @@ public class AnimationenAbspielen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mutter = new Abspielen2();
+        //mutter = new Abspielen2();
         animMoerder = GetComponent<Animator>();
     }
 
@@ -32,7 +32,10 @@ public class AnimationenAbspielen : MonoBehaviour
 
     public void gasExplosion()
     {
+        Debug.Log(mutter);
+        Debug.Log(mutter.anim);
         animMoerder.SetTrigger("Start");
+        mutter.anim.SetTrigger("Start");
         wegMoerder = 0;
         Debug.Log("startet schlagen");
 
@@ -51,6 +54,7 @@ public class AnimationenAbspielen : MonoBehaviour
         {
             
             animMoerder.SetTrigger("GasExplosion/AlleTot2");
+            Debug.Log("explosionbeenden wird gestartet");
             mutter.explosionBeenden();
             //alles wird dunkel
         }

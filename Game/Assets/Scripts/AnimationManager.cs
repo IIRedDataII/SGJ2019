@@ -238,7 +238,7 @@ public class AnimationManager : MonoBehaviour
             else if (!doorClosed && gasSwitched && slotAirFilled == 0 && slotDoorFilled == 0)
             {
                 Debug.Log("ERGEBNIS: Das Opfer wurde ermordet aber das Haus ging nicht hoch!");
-                robotGood.GetComponent<Abspielen2>().gasExplosion();
+                //robotGood.GetComponent<Abspielen2>().gasExplosion();
                 Debug.Log("sie wird in main gestartet");
                 robotBad.GetComponent<AnimationenAbspielen>().gasExplosion();
                 // TODO: ende anpassen
