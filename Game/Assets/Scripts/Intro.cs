@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Intro : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class Intro : MonoBehaviour
     public Sprite disable;
     public Sprite door;
 
+    bool shouldListen = false;
+    bool hasShownNewspaper = false;
+
     void Awake ()
 	{
         Debug.Log("Woke Intro");
@@ -27,6 +31,31 @@ public class Intro : MonoBehaviour
     void Start()
     {
         Debug.Log("Started Intro Script");
+    }
+
+    public void listen()
+    {
+        this.shouldListen = true;
+    }
+
+    void Update()
+    {
+        if (Input.anyKey && this.shouldListen)
+        {
+            SceneManager.LoadScene("Scenes/Room 1", LoadSceneMode.Single);
+            if (!hasShownNewspaper)
+            {
+                showNewspaper();
+            } else
+            {
+               SceneManager.LoadScene("Scenes/Intro", LoadSceneMode.Single);
+            }
+        }
+    }
+
+    private void showNewspaper()
+    {
+        hasShownNewspaper = true;
     }
 
     private void conifgureNewspaper()
