@@ -9,11 +9,13 @@ public class MoveItems : MonoBehaviour
     
     // Variables
     private bool pulsating;
-    private GameObject grabbedItem;
+    public GameObject grabbedItem;
     private GameObject selectedMarker;
     private Coroutine itemPulsate;
     private Coroutine markerPulsate;
     private bool movedItems;
+    
+    
 
     // Unity variables
     public GameObject grabAura;
@@ -108,7 +110,7 @@ public class MoveItems : MonoBehaviour
                     Debug.Log("Grabbing: Got item!");
                     StopCoroutine(itemPulsate);
                     pulsating = false;
-                    SetAlpha(true, 1);
+                    SetAlpha(true, 0);
                     movedItems = true;
                 }
 
@@ -258,14 +260,25 @@ public class MoveItems : MonoBehaviour
             objects = GameObject.FindGameObjectsWithTag("Item");
         else
             objects = GameObject.FindGameObjectsWithTag("Marker");
-        
+
         foreach (GameObject _object in objects)
         {
-            GameObject child = _object.transform.GetChild(0).gameObject;
-            Renderer renderer = child.GetComponent<Renderer>();
-            Color color = renderer.material.color;
-            color.a = alpha;
-            renderer.material.color = color;
+            if (isItem)
+            {
+                GameObject child = _object.transform.GetChild(0).gameObject;
+                Renderer renderer = child.GetComponent<Renderer>();
+                Color color = renderer.material.color;
+                color.a = alpha;
+                renderer.material.color = color;
+            }
+            else
+            {
+                GameObject child = _object.gameObject;
+                Renderer renderer = child.GetComponent<Renderer>();
+                Color color = renderer.material.color;
+                color.a = alpha;
+                renderer.material.color = color;
+            }
         }
         
     }
@@ -279,24 +292,20 @@ public class MoveItems : MonoBehaviour
         pulsating = true;
         
         // Fade in
-        for (float i = 0; i <= (isItem ? maxAlpha : 1); i += maxAlpha / 10)
+        for (float i = 0; i <= (isItem ? maxAlpha : 1); i += (isItem ? maxAlpha / 10 : 0.1f))
         {
             i = (float)Math.Round(i, 4);
             SetAlpha(isItem, i);
-            yield return new WaitForSeconds(pulseSpeed);
+            yield return new WaitForSeconds(isItem ? pulseSpeed : 0.05f);
         }
         
         // Fade out
-        for (float i = (isItem ? maxAlpha : 1); i >= 0; i -= maxAlpha / 10)
+        for (float i = (isItem ? maxAlpha : 1); i >= 0; i -= (isItem ? maxAlpha / 10 : 0.1f))
         {
             i = (float)Math.Round(i, 4);
             SetAlpha(isItem, i);
-            yield return new WaitForSeconds(pulseSpeed);
+            yield return new WaitForSeconds(isItem ? pulseSpeed : 0.05f);
         }
-        
-        // Force opaque items in at the end of the last coroutine
-        if (isItem && grabbedItem != null)
-            SetAlpha(true, 1);
         
         pulsating = false;
     }

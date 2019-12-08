@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Slot
   - Openable
+  - Interactable
   layers:
   - Default
   - TransparentFX
