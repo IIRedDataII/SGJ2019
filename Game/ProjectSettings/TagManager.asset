@@ -7,6 +7,8 @@ TagManager:
   - Marker
   - Item
   - Slot
+  - Openable
+  - Interactable
   layers:
   - Default
   - TransparentFX

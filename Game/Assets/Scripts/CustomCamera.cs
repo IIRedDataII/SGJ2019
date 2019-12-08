@@ -9,16 +9,28 @@ public class CustomCamera : MonoBehaviour
     // constants
     private const int accuracy = 4;
     private const double precision = 0.00000001;
+    private double maxSpeed = 0.02;
     
     // variables
     private float sensivity = 10f;
-    private double speed = 1f;
+    private double speed = 0.02;
+    Rigidbody rigidbody;
     
     #endregion
+
+    private void Start()
+    {
+
+        #region Initialization
+        
+        rigidbody = GetComponent<Rigidbody>();
+        
+        #endregion
+
+    }
     
     private void Update()
     {
-
         #region Mouse Lock
         
         if (Input.GetMouseButtonDown(0))
@@ -43,6 +55,10 @@ public class CustomCamera : MonoBehaviour
         #endregion
         
         #region Movement
+
+        // remove physics from rigidbody
+        rigidbody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        rigidbody.angularVelocity = new Vector3(0.0f, 0.0f, 0.0f);
         
         // left
         if (Input.GetKey(KeyCode.A)) {
@@ -77,7 +93,7 @@ public class CustomCamera : MonoBehaviour
         // speed
         double scrollDelta = Input.mouseScrollDelta.y;
 
-        if (scrollDelta > 0 && speed < 100)
+        if (scrollDelta > 0 && speed < maxSpeed)
         {
             double addend = Mathf.Pow(10, GetSignificance(speed));
             addend = Math.Round((float)addend, accuracy);
